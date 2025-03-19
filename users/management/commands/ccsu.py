@@ -1,6 +1,10 @@
+import logging
+
 from django.core.management import BaseCommand
 
 from users.models import User
+
+logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -15,4 +19,4 @@ class Command(BaseCommand):
 
         admin_user.set_password('qwerty')
         admin_user.save()
-        print('Admin Created')
+        logger.info('Admin Created')
