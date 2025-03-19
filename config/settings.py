@@ -10,13 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import logging
 from pathlib import Path
 
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -28,7 +28,6 @@ SECRET_KEY = 'django-insecure-rvtr2dfemzm8+006ct!n1d)*^0_z9k)7-uc6w7)==#4b@lgw5*
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -74,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -83,6 +81,7 @@ USER = os.getenv('MS_SQL_USER')
 PASSWORD = os.getenv('MS_SQL_KYE')
 HOST = os.getenv('MS_SQL_SERVER')
 DATABASE = os.getenv('MS_SQL_DATABASE')
+PAD_DATABASE = os.getenv('MS_PAD_DATABASE')
 DRIVER = os.getenv('MS_SQL_DRIVER')
 
 DATABASES = {
@@ -97,7 +96,6 @@ DATABASES = {
         }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -117,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -129,7 +126,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -140,3 +136,60 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+        },
+        'simple': {
+            'format': '%(levelname)s - %(name)s - %(message)s',
+        },
+        'error': {
+            'format': '%(asctime)s - %(levelname)s - %(name)s - %(lineno)d - %(message)s',
+        },
+    },
+    'handlers': {
+        # Обработчик для записи логов в файл
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs/django.log',
+            'formatter': 'verbose',
+            'encoding': 'utf-8',
+        },
+        # Обработчик для вывода логов в консоль
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        # Отдельный обработчик ERROR для записи подробных логов в файл
+        'error_file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs/django_error.log',
+            'formatter': 'error',
+            'encoding': 'utf-8',
+        },
+    },
+    'loggers': {
+        'django': {  # Для стандартных сообщений Django
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.errors': {
+            'handlers': ['error_file'],  # остался только 'error_file' для ошибок
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'users': {  # Для приложения users
+            'handlers': ['file', 'console', 'error_file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
