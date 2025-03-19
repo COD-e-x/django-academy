@@ -181,8 +181,8 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'django.errors': {
-            'handlers': ['error_file'],  # остался только 'error_file' для ошибок
+        'django.errors': {  # Для записи ошибок в файл
+            'handlers': ['error_file'],
             'level': 'ERROR',
             'propagate': False,
         },

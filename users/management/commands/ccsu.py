@@ -6,6 +6,7 @@ from users.models import User
 
 logger = logging.getLogger(__name__)
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         admin_user = User.objects.create(
