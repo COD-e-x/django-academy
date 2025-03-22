@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
-import logging
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rvtr2dfemzm8+006ct!n1d)*^0_z9k)7-uc6w7)==#4b@lgw5*'
+SECRET_KEY = "django-insecure-rvtr2dfemzm8+006ct!n1d)*^0_z9k)7-uc6w7)==#4b@lgw5*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,69 +32,66 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     # my app
-    'users',
-    'dogs',
+    "users",
+    "dogs",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 load_dotenv()
-USER = os.getenv('MS_SQL_USER')
-PASSWORD = os.getenv('MS_SQL_KYE')
-HOST = os.getenv('MS_SQL_SERVER')
-DATABASE = os.getenv('MS_SQL_DATABASE')
-PAD_DATABASE = os.getenv('MS_PAD_DATABASE')
-DRIVER = os.getenv('MS_SQL_DRIVER')
+USER = os.getenv("MS_SQL_USER")
+PASSWORD = os.getenv("MS_SQL_KYE")
+HOST = os.getenv("MS_SQL_SERVER")
+DATABASE = os.getenv("MS_SQL_DATABASE")
+PAD_DATABASE = os.getenv("MS_PAD_DATABASE")
+DRIVER = os.getenv("MS_SQL_DRIVER")
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': DATABASE,
-        'PASSWORD': PASSWORD,
-        'HOST': HOST,
-        'PORT': '',
-        'OPTIONS': {
-            'driver': DRIVER
-        }
+    "default": {
+        "ENGINE": "mssql",
+        "NAME": DATABASE,
+        "PASSWORD": PASSWORD,
+        "HOST": HOST,
+        "PORT": "",
+        "OPTIONS": {"driver": DRIVER},
     }
 }
 
@@ -103,25 +100,25 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = "ru-ru"
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 
@@ -130,67 +127,71 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
+STATICFILES_DIRS = (BASE_DIR / "static",)
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'users.User'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = "users.User"
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         },
-        'simple': {
-            'format': '%(levelname)s - %(name)s - %(message)s',
+        "simple": {
+            "format": "%(levelname)s - %(name)s - %(message)s",
         },
-        'error': {
-            'format': '%(asctime)s - %(levelname)s - %(name)s - %(lineno)d - %(message)s',
+        "error": {
+            "format": "%(asctime)s - %(levelname)s - %(name)s - %(lineno)d - %(message)s",
         },
     },
-    'handlers': {
+    "handlers": {
         # Обработчик для записи логов в файл
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs/django.log',
-            'formatter': 'verbose',
-            'encoding': 'utf-8',
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "logs/django.log",
+            "formatter": "verbose",
+            "encoding": "utf-8",
         },
         # Обработчик для вывода логов в консоль
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
         },
         # Отдельный обработчик ERROR для записи подробных логов в файл
-        'error_file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs/django_error.log',
-            'formatter': 'error',
-            'encoding': 'utf-8',
+        "error_file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "logs/django_error.log",
+            "formatter": "error",
+            "encoding": "utf-8",
         },
     },
-    'loggers': {
-        'django': {  # Для стандартных сообщений Django
-            'handlers': ['file', 'console'],
-            'level': 'INFO',
-            'propagate': False,
+    "loggers": {
+        "django": {  # Для стандартных сообщений Django
+            "handlers": ["file", "console"],
+            "level": "INFO",
+            "propagate": False,
         },
-        'django.errors': {  # Для записи ошибок в файл
-            'handlers': ['error_file'],
-            'level': 'ERROR',
-            'propagate': False,
+        "django.errors": {  # Для записи ошибок в файл
+            "handlers": ["error_file"],
+            "level": "ERROR",
+            "propagate": False,
         },
-        'users': {  # Для приложения users
-            'handlers': ['file', 'console', 'error_file'],
-            'level': 'DEBUG',
-            'propagate': False,
+        "users": {  # Для приложения users
+            "handlers": ["file", "console", "error_file"],
+            "level": "DEBUG",
+            "propagate": False,
         },
     },
 }
