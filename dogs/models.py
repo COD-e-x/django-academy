@@ -5,7 +5,7 @@ from users.models import NULLABLE_FOR_STRING
 
 
 class Breed(models.Model):
-    name = models.CharField(max_length=100, verbose_name="bread")
+    name = models.CharField(max_length=100, verbose_name="breed")
     description = models.CharField(
         max_length=1000,
         verbose_name="description",
