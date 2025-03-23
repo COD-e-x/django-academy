@@ -5,7 +5,10 @@ from users.models import NULLABLE_FOR_STRING
 
 
 class Breed(models.Model):
-    name = models.CharField(max_length=100, verbose_name="breed")
+    name = models.CharField(
+        max_length=100,
+        verbose_name="breed",
+    )
     description = models.CharField(
         max_length=1000,
         verbose_name="description",
@@ -21,10 +24,21 @@ class Breed(models.Model):
 
 
 class Dog(models.Model):
-    name = models.CharField(max_length=250, verbose_name="dog name")
-    breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to="dogs/", **NULLABLE)
-    birth_date = models.DateTimeField(**NULLABLE)
+    name = models.CharField(
+        max_length=250,
+        verbose_name="dog name",
+    )
+    breed = models.ForeignKey(
+        Breed,
+        on_delete=models.CASCADE,
+    )
+    photo = models.ImageField(
+        upload_to="dogs/",
+        **NULLABLE,
+    )
+    birth_date = models.DateTimeField(
+        **NULLABLE,
+    )
 
     class Meta:
         verbose_name = "dog"

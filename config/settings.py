@@ -158,13 +158,13 @@ LOGGING = {
         "file": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs/django.log",
+            "filename": BASE_DIR / "logs/info-file.log",
             "formatter": "verbose",
             "encoding": "utf-8",
         },
         # Обработчик для вывода логов в консоль
         "console": {
-            "level": "DEBUG",
+            "level": "INFO",
             "class": "logging.StreamHandler",
             "formatter": "simple",
         },
@@ -172,25 +172,34 @@ LOGGING = {
         "error_file": {
             "level": "ERROR",
             "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs/django_error.log",
+            "filename": BASE_DIR / "logs/error-file.log",
             "formatter": "error",
             "encoding": "utf-8",
         },
     },
     "loggers": {
-        "django": {  # Для стандартных сообщений Django
+        # logger для django
+        "django": {
             "handlers": ["file", "console"],
             "level": "INFO",
             "propagate": False,
         },
-        "django.errors": {  # Для записи ошибок в файл
+        # logger для ошибок в django
+        "django.errors": {
             "handlers": ["error_file"],
             "level": "ERROR",
             "propagate": False,
         },
-        "users": {  # Для приложения users
-            "handlers": ["file", "console", "error_file"],
-            "level": "DEBUG",
+        # logger для приложения users
+        "users": {
+            "handlers": ["file", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        # logger для ошибок в users
+        "users.errors": {
+            "handlers": ["error_file"],
+            "level": "ERROR",
             "propagate": False,
         },
     },
