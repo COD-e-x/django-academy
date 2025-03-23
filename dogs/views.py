@@ -4,6 +4,7 @@ from dogs.models import Breed, Dog
 
 
 def index(request):
+    """Отображает главную страницу с перечнем первых 3-х пород."""
     context = {
         "objects_list": Breed.objects.all()[:3],
         "title": "Питомник - Главная",
@@ -11,5 +12,33 @@ def index(request):
     return render(
         request,
         "dogs/index.html",
+        context,
+    )
+
+
+def breeds_list(request):
+    """Отображает список всех пород собак."""
+    context = {
+        "objects_list": Breed.objects.all(),
+        "title": "Питомник - Все наши пароды",
+    }
+    return render(
+        request,
+        "dogs/breeds.html",
+        context,
+    )
+
+
+def breed_dogs_list(request, pk: int):
+    """Отображает список собак для конкретной породы."""
+    breed_item = Breed.objects.get(pk=pk)
+    context = {
+        "objects_list": Dog.objects.filter(breed_id=pk),
+        "title": f"Собаки пароды - {breed_item.name}",
+        "breed_pk": breed_item.pk,
+    }
+    return render(
+        request,
+        "dogs/dogs.html",
         context,
     )
