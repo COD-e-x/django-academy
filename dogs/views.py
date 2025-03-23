@@ -71,3 +71,4 @@ def dog_create(request):
             form.save()
             return HttpResponseRedirect(reverse("dogs:dogs_list"))
     return render(request, "dogs/create.html", {"form": DogForm()})
+
