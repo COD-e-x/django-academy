@@ -7,28 +7,28 @@ NULLABLE_FOR_STRING = {"null": False, "blank": True}
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(unique=True, verbose_name="email")
+    email = models.EmailField(unique=True, verbose_name="Эл. почта")
     phone = models.CharField(
         max_length=35,
-        verbose_name="phone number",
+        verbose_name="Номер телефона",
         **NULLABLE_FOR_STRING,
     )
     telegram = models.CharField(
         max_length=150,
-        verbose_name="telegram username",
+        verbose_name="Телеграм",
         **NULLABLE_FOR_STRING,
     )
     is_active = models.BooleanField(
         default=True,
-        verbose_name="active",
+        verbose_name="Активен",
     )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name = "User"
-        verbose_name_plural = "Users"
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
         ordering = ["id"]
 
     def __str__(self):
